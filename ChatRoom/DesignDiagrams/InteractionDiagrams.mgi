@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <CommunicationClass name="com.chatroom.dbhelper.UserHelper" x="189" y="152">
+        <Extension destinationClassName="com.chatroom.persiststorage.ExcuteQueryObject"/>
+        <Association
+            destinationClassName="com.chatroom.persiststorage.DataBase"
+            endpointName="db" kind="Simple"/>
+        <Communication destinationClassName="com.chatroom.persiststorage.ExcuteQueryObject"/>
+        <Communication destinationClassName="com.chatroom.models.User">
+            <Point x="459" y="233"/>
+        </Communication>
+        <Communication destinationClassName="com.chatroom.persiststorage.DataBase"/>
+    </CommunicationClass>
+    <CommunicationClass
+        name="com.chatroom.interfaces.IJsonSeriserialize" x="773" y="418"/>
+    <CommunicationClass name="com.chatroom.servlet.LoginServlet" x="662" y="733">
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+    </CommunicationClass>
+    <CommunicationClass name="com.chatroom.models.ChatMessage" x="98" y="519">
+        <Extension destinationClassName="com.chatroom.interfaces.IJsonSeriserialize"/>
+    </CommunicationClass>
+    <CommunicationClass
+        name="com.chatroom.persiststorage.ExcuteQueryObject" x="324" y="22"/>
+    <CommunicationClass name="com.chatroom.models.User" x="549" y="331">
+        <Extension destinationClassName="com.chatroom.interfaces.IJsonSeriserialize"/>
+    </CommunicationClass>
+    <CommunicationClass name="com.chatroom.interfaces.IQueriable"
+        x="803" y="342"/>
+    <CommunicationClass name="com.chatroom.servlet.CloseChatServlet"
+        x="672" y="584">
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.models.User">
+            <Point x="718" y="345"/>
+        </Communication>
+        <Communication destinationClassName="com.chatroom.controller.ChatController"/>
+    </CommunicationClass>
+    <CommunicationClass name="com.chatroom.servlet.JsonServlet" x="930" y="589"/>
+    <CommunicationClass name="com.chatroom.business.UserBusiness" x="72" y="313">
+        <Communication destinationClassName="com.chatroom.dbhelper.UserHelper"/>
+        <Communication destinationClassName="com.chatroom.models.User">
+            <Point x="351" y="295"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="com.chatroom.persiststorage.DBInfo"
+        x="208" y="23"/>
+    <CommunicationClass name="com.chatroom.servlet.InformationServlet"
+        x="279" y="520">
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User">
+            <Point x="392" y="471"/>
+        </Communication>
+    </CommunicationClass>
+    <CommunicationClass name="com.chatroom.persiststorage.DataBase"
+        x="68" y="21">
+        <Association
+            destinationClassName="com.chatroom.persiststorage.DBInfo"
+            endpointName="dbinfo" kind="Simple"/>
+    </CommunicationClass>
+    <CommunicationClass name="com.chatroom.controller.ChatController"
+        x="347" y="735">
+        <Association destinationClassName="com.chatroom.models.User"
+            endpointName="chatingUser" kind="Simple"/>
+        <Association
+            destinationClassName="com.chatroom.controller.ChatController"
+            endpointName="connectedUsers" kind="Simple"/>
+        <Association destinationClassName="com.chatroom.models.User"
+            endpointName="user" kind="Simple"/>
+        <Communication destinationClassName="com.chatroom.models.ChatMessage">
+            <Point x="86" y="721"/>
+        </Communication>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User">
+            <Point x="657" y="559"/>
+        </Communication>
+    </CommunicationClass>
+</ClassDiagram>
