@@ -1,0 +1,2 @@
+# ChatOnline
+使用WebSocket及JAVA搭建的在线聊天室系统，包含服务端和客户端代码
