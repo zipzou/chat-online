@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+.fm-register {
+	width: 100%;
+	margin-top: 120px;
+}
+
+.register-area {
+	margin-top: 40px;
+}
+
+.fm-register .fm-group {
+	width: 100%;
+	display: block;
+	height: 48px;
+    border: 1px solid #999;
+	margin-bottom: 40px;
+}
+
+.fm-register .fm-group a[class^='icon-'] {
+	width: 48px;
+	height: 48px;
+	font-size: 24px;
+	border-right: 1px solid #ccc;
+	background: #f1edea;
+	display: block;
+	float: left;
+	line-height: 48px;
+	text-align: center;
+    color: #33b3a1;
+}
+
+.fm-register .fm-group a.status-indicator {
+	font-size: 24px;
+	color: #16e363;
+	margin-left: 8px;
+	display: none;
+}
+
+.fm-register .fm-group a.show-indicator {
+	display: inline;
+}
+
+.fm-register .fm-group input {
+	height: 100%;
+	width: calc(90% - 60px);
+	width: -webkit-calc(90% - 60px);
+	width: -moz-calc(90% - 60px);
+	font-size: 1.1em;
+	font-family: "Consolas", "微软雅黑", "Arial", "Heiti-TC";
+	padding-left: 12px;
+    transition: box-shadow 0.18 ease-in-out;
+    
+    -webkit-transition: box-shadow 0.18 ease-in-out;
+    -moz-transition: box-shadow 0.18 ease-in-out;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
+
+.input-focused {
+    box-shadow: 0px 0px 10px rgba(47, 197, 176, 0.85);
+}
+
+.operate-grid {
+	width: 100%;
+	margin-bottom: 48px;
+}
+
+.btn-primary {
+	width: 100%;
+	display: block;
+	margin-top: 16px;
+}
+
+a.notify {
+	margin-top: 16px;
+	display: inline-block;
+	color: #999;
+	font-size: 12px;
+}

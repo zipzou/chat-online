@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="com.chatroom.utils.MD5Utils" x="799" y="1012">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.chatroom.dbhelper.UserHelper" x="234" y="435">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.persiststorage.ExcuteQueryObject"/>
+        <Association
+            destinationClassName="com.chatroom.persiststorage.DataBase"
+            endpointName="db" kind="Simple"/>
+        <Communication destinationClassName="com.chatroom.persiststorage.ExcuteQueryObject"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+        <Communication destinationClassName="com.chatroom.persiststorage.DataBase"/>
+    </Class>
+    <Class name="com.chatroom.interfaces.IJsonSeriserialize" x="388" y="-216">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.chatroom.servlet.LogoutServlet" x="11" y="878">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+    </Class>
+    <Class name="com.chatroom.models.ChatMessage" x="184" y="-91">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.interfaces.IJsonSeriserialize"/>
+    </Class>
+    <Class name="com.chatroom.persiststorage.ExcuteQueryObject" x="346" y="302">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.chatroom.models.User" x="538" y="-102">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.interfaces.IJsonSeriserialize"/>
+    </Class>
+    <Class name="com.chatroom.servlet.CloseChatServlet" x="126" y="881">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+        <Communication destinationClassName="com.chatroom.controller.ChatController"/>
+    </Class>
+    <Class name="com.chatroom.servlet.RegisterServlet" x="741" y="878">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+        <Communication destinationClassName="com.chatroom.utils.ResponseInformation"/>
+    </Class>
+    <Class name="com.chatroom.servlet.SingleChatServlet" x="374" y="881">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+        <Communication destinationClassName="com.chatroom.controller.ChatController"/>
+    </Class>
+    <Class name="com.chatroom.servlet.JsonServlet" x="317" y="722">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.chatroom.business.UserBusiness" x="287" y="967">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="com.chatroom.dbhelper.UserHelper"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+    </Class>
+    <Class name="com.chatroom.servlet.UserListServlet" x="616" y="883">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+        <Communication destinationClassName="com.chatroom.controller.ChatController"/>
+    </Class>
+    <Class name="com.chatroom.persiststorage.DBInfo" x="846" y="505">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.chatroom.servlet.InformationServlet" x="247" y="883">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+    </Class>
+    <Class name="com.chatroom.servlet.UserValidation" x="500" y="881">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.servlet.JsonServlet"/>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+    </Class>
+    <Class name="com.chatroom.utils.ResponseInformation" x="631" y="1019">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.chatroom.persiststorage.DataBase" x="614" y="508">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="com.chatroom.persiststorage.DBInfo"
+            endpointName="dbinfo" kind="Simple"/>
+    </Class>
+    <Class name="com.chatroom.controller.ChatController" x="358" y="131">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="com.chatroom.models.User"
+            endpointName="chatingUser" kind="Simple">
+            <Point x="456" y="77"/>
+        </Association>
+        <Association
+            destinationClassName="com.chatroom.controller.ChatController"
+            endpointName="connectedUsers" kind="Simple">
+            <Point x="721" y="191"/>
+        </Association>
+        <Association destinationClassName="com.chatroom.models.User"
+            endpointName="user" kind="Simple">
+            <Point x="644" y="90"/>
+        </Association>
+        <Communication destinationClassName="com.chatroom.models.ChatMessage"/>
+        <Communication destinationClassName="com.chatroom.business.UserBusiness"/>
+        <Communication destinationClassName="com.chatroom.models.User"/>
+    </Class>
+</ClassDiagram>
