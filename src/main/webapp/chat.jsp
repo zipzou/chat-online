@@ -25,7 +25,9 @@ if (null != sessionObj) {
 <script type="text/javascript">
 var loginedUsername = '<%=loginedUser.getUsername()%>';
 var loginedUsernick = '<%=loginedUser.getNickname()%>'
-var url = 'ws://192.168.1.108:8080/ChatRoom/chatroom/chat/' + loginedUsername;
+var ip = '<%=request.getLocalAddr()%>'
+var context = encodeURIComponent('chat-online-maven')
+var url = 'ws://' + ip + ':8080/' + context + '/chatroom/chat/' + loginedUsername;
 function checkLeave() {
 	return  '确定离开当前页面吗？您的连接可能暂时被关闭，我们将自动为您备份聊天记录！'
 }

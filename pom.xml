@@ -29,7 +29,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>chat-online-maven</finalName>
+		<finalName>ChatOnline</finalName>
 		<defaultGoal>compile</defaultGoal>
 		<plugins>
 			<plugin>
