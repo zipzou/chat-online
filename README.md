@@ -1,11 +1,32 @@
-# ChatOnline
-使用WebSocket及JAVA搭建的在线聊天室系统，包含服务端和客户端代码
+# 在线聊天室 v2.0
 
-## 改进
+在线聊天室v2.0在原有的基础上进一步扩展，结合使用**前后端分离技术**，使用[*React*]()和[*SpringBoot*]()用于创建前端与后端，具有更加稳定的效果。
 
-+ 修正了数据库的错误
-+ 修正了WebSocket服务器错误
+聊天功能同样基于WebSocket协议，相比v1.0更加完善了在线列表，解决了原有聊天过程中，用户列表的错乱问题。
 
-*其他相关Issue，请查看[Issue](https://github.com/Frank17/ChatOnline/issues)，或自行提Issue，或发送email至：[frankdeveloper@126.com](mailto://frankdeveloper@126.com)*
+------------------------
 
-> 若您为发布版，请将js中的IP地址改为对应的IP或域名
+## 环境配置
+
+### 前端支持环境
+
+前端使用React开发，因此需要基于NodeJs进行编译。
+```:shell
+yarn install && yarn build 
+```
+
+### 后端支持环境
+
+后端基于Java 1.8，若从源码编译，请事先安装配置Java以及对应的maven环境。
+
+```:shell
+mvn clean && mvn package
+```
+
+```:yml
+spring: 
+  datasource:
+    url: jdbc:xxxx:3306/chat?
+```
+
+## 如何使用

@@ -1,7 +1,5 @@
 package com.github.zipzou.chat.chatback.vo.req;
 
-import com.github.zipzou.chat.chatback.vo.ValueObject;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

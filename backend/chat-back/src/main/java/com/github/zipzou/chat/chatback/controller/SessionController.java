@@ -1,7 +1,5 @@
 package com.github.zipzou.chat.chatback.controller;
 
-import javax.servlet.http.HttpSession;
-
 import com.github.zipzou.chat.chatback.beans.mapper.SessionMap;
 import com.github.zipzou.chat.chatback.service.SessionId;
 import com.github.zipzou.chat.chatback.service.SessionService;

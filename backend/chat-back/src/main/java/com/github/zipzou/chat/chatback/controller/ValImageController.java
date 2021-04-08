@@ -1,22 +1,15 @@
 package com.github.zipzou.chat.chatback.controller;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Base64;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.github.zipzou.chat.chatback.service.SessionService;
 import com.github.zipzou.chat.chatback.vo.ValueObject;
 import com.github.zipzou.chat.chatback.vo.res.ResponseVo;
-import com.github.zipzou.chat.chatback.vo.res.SessionVo;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 

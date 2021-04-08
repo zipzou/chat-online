@@ -24,7 +24,7 @@ public class InsertUserTests {
     user.setNickname("test3");
     user.setGender(1);
 
-    int row = userDao.insertUser(user);
+    userDao.insertUser(user);
     Long key = user.getId();
     log.info(user.getId());
     assertTrue(key > 1);
