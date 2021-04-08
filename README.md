@@ -11,16 +11,21 @@
 ### 前端支持环境
 
 前端使用React开发，因此需要基于NodeJs进行编译。
-```:shell
-yarn install && yarn build 
+
+```:bash
+git clone https://github.com/zipzou/chat-online.git
+
+cd chat-online/frontend/chat && yarn install && yarn build 
 ```
 
 ### 后端支持环境
 
 后端基于Java 1.8，若从源码编译，请事先安装配置Java以及对应的maven环境。
 
-```:shell
-mvn clean && mvn package
+```:bash
+git clone https://github.com/zipzou/chat-online.git
+
+cd chat-online/backend/chat-back/ && mvn clean && mvn package
 ```
 
 ```:yml
