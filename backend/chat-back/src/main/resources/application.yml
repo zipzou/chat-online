@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    type: org.apache.commons.dbcp2.BasicDataSource
+    url: jdbc:mysql://118.31.64.3:3306/chat?useUnicode=true&characterEncoding=utf8mb4&verifyServerCertificate=false&useSSL=false
+    username: zip
+    password: zzp123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dbcp2:
+      url: jdbc:mysql://118.31.64.3:3306/chat?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=false
+      max-idle: 5
+      max-total: 10
+      max-wait-millis: 3000
+      username: zip
+      password: zzp123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 3
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      pool-prepared-statements: true
+  jpa:
+    show-sql: true
+  session:
+    store-type: jdbc
+logging:
+  level:
+    com:
+      github:
+        zipzou:
+          chat:
+            chatback:
+              dao:
+                mapper: DEBUG
+      ibatis: DEBUG  
+    java:
+      sql:
+        Connection: DEBUG  
+        Statement: DEBUG  
+        PreparedStatement: DEBUG  
+        ResultSet: DEBUG

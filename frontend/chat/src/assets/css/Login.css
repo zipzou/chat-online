@@ -1,0 +1,41 @@
+.container {
+  width: 90%;
+}
+
+.chat-logo {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+.left-part {
+  margin-top: 128px;
+}
+
+.right-part {
+
+}
+
+.icon-g {
+  text-align: center;
+  width: 40%;
+  display: inline-block;
+}
+
+.icon-g p {
+  font-size: 26px;
+  padding: 32px 0;
+  font-weight: 800;
+}
+.form-group {
+  margin: 0 auto;
+  margin-top: 128px;
+  width: 80%;
+}
+
+.form-group .icon-avator {
+  text-align: center;
+  margin: 36px auto;
+  display: block;
+  background: #1976D2;
+}

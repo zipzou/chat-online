@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;">
+  <link rel="shortcut icon" href="assets/img/icon@3x.png">
+  <style>
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      max-width: 960px;
+      padding-top: 220px;
+    }
+    .svg-icon {
+      width: 100%;
+    }
+    .svg-icon img {
+      width: 100%;
+    }
+    .title {
+      text-align: center;
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    /* ipad pro */
+    @media screen and (max-width: 1024px) {
+      .container {
+        padding-top: 320px;
+      }
+      .title {
+        font-size: 36px;
+      }
+    }
+    /* ipad */
+    @media screen and (max-width: 768px) {
+      .container {
+        padding-top: 240px;
+      }
+      .title {
+        font-size: 28px;
+        padding-top: 48px;
+      }
+    }
+    @media screen and (max-width: 540px) {
+      .container {
+        padding-top: 180px;
+      }
+      .title {
+        font-size: 18px;
+        padding-top: 20px;
+      }
+    }
+    /* iphone6 7 8 plus */
+    @media screen and (max-width: 414px) {
+      .container {
+        padding-top: 210px;
+      }
+      .title {
+        font-size: 18px;
+        padding-top: 20px;
+      }
+    }
+    /* iphoneX */
+    @media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 3) {
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        max-width: 960px;
+        padding-top: 220px;
+      }
+    }
+    /* iphone6 7 8 */
+    @media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 2) {
+      .container {
+        padding-top: 200px;
+      }
+      .title {
+        font-size: 18px;
+        padding-top: 24px;
+        padding-bottom: 0px;
+      }
+    }
+    /* iphone5 */
+    @media screen and (max-width: 320px) {
+      .container {
+        padding-top: 156px;
+      }
+      .title {
+        font-size: 16px;
+        padding-top: 16px;
+      }
+    }
+
+
+  </style>
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
+
+  <!-- UIkit JS -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit-icons.min.js"></script>
+  <title>出错啦</title>
+</head>
+<body>
+  <div class="container">
+    <div class="svg-icon">
+      <img src="/assets/img/500.svg" />
+    </div>
+    <div>
+      <h3 class="title">很抱歉，服务器出错啦...</h3>
+    </div>
+  </div>
+</body>
+</html>

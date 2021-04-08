@@ -1,0 +1,138 @@
+.header-icon {
+  font-size: 24px;
+  color: #fff;
+  text-decoration: none;
+  padding-left: 24px;
+  padding-right: 16px;
+}
+.header-icon:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-icon .iconfont {
+  font-size: 56px;
+}
+
+.header-title {
+  font-size: 24px;
+}
+
+.uk-navbar-container.header {
+  background-color: #5E35B1 !important;
+  height: 104px;
+}
+
+.uk-navbar-item {
+  color: #fff;
+}
+
+.uk-navbar-item .nav-title {
+  font-size: 20px;
+}
+
+.uk-navbar-item a {
+  color: #fff;
+  text-decoration: none;
+}
+.uk-navbar-item a:hover{
+  color: #fff;
+  text-decoration: none;
+}
+
+.uk-navbar-item.active {
+  position: relative;
+}
+
+.uk-navbar-item.active::after {
+  height: 1px;
+  background: #fff;
+  content: ' ';
+  display: block;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+}
+
+.search-item {
+  color: #fff;
+}
+
+.search-bar {
+  line-height: 104px;
+}
+
+.search-bar .uk-search-icon, .search-bar .uk-search-input, .search-bar input {
+  color: #fff;
+}
+
+.search-bar input::placeholder, .search-bar input::-webkit-input-placeholder{
+  color: #eee;
+  font-weight: 200;
+}
+.search-bar input:-moz-placeholder , .search-bar input:-ms-input-placeholder {
+  color: #eee;
+  font-weight: 200;
+}
+
+.main {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+
+.sec-title {
+  border-left: 8px solid #5E35B1;
+  padding-left: 16px;
+}
+
+.article-list {
+
+}
+
+.article-list .article-item {
+  /* background: #F5F5F5; */
+  padding: 8px;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: justify;
+}
+
+ul.article-list {
+  list-style: none;
+}
+
+ul.article-list li {
+  list-style: none;
+}
+
+.article-item .article-title * {
+  margin-bottom: 2px;
+}
+
+.article-title .title-badge {
+  font-size: 14px;
+  height: 25px;
+  border-radius: 2px;
+  margin-right: 6px;
+}
+
+.badge-green {
+  background-color: #2E7D32;
+}
+
+.article-item .article-meta, .article-item .article-meta a {
+  color: #9E9E9E;
+  font-size: 14px;
+}
+.article-item .article-meta a {
+  text-decoration: none;
+  cursor: text;
+}
+.article-item .article-meta a:hover {
+  text-decoration: none;
+  color: #9E9E9E;
+}
