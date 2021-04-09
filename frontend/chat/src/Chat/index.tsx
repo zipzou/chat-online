@@ -1,5 +1,4 @@
 import React from "react";
-import { MustLoginComponent } from "../base/AfterLogin";
 import { PropsWithRoute } from "../PropsWithRoute";
 import { AppStatus, checkStatus } from "../service/Status";
 

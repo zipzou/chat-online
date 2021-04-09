@@ -1,10 +1,11 @@
+import { createHashHistory } from "history";
 import React from "react";
-import { MustLoginComponent } from "../base/AfterLogin";
+import { Router } from "react-router";
+import { Link } from "react-router-dom";
 import { Constants } from "../constants";
-import { User } from "../model/user";
 import { PropsWithRoute } from "../PropsWithRoute";
 import { ResponseBody } from "../ResponseBody";
-import { Session } from "../session";
+import { AppStatus, checkStatus } from "../service/Status";
 
 export class Loading extends React.Component<PropsWithRoute, unknown> {
 
@@ -21,24 +22,24 @@ export class Loading extends React.Component<PropsWithRoute, unknown> {
   }
 
   componentDidMount() {
-    console.log('loading...')
-    if (null === localStorage.getItem(Constants.SESS_KEY)) {
-      this.getSessId().then((sessId: string) => {
-        Session.sessionId = sessId
-        localStorage.setItem(Constants.SESS_KEY, sessId)
-        this.props.history.push('/login')
-      })
-      .catch(console.log)
-    } else {
-      if (localStorage.getItem(Constants.USER_UUID_KEY) === null) {
-        this.props.history.push('/login')
+    checkStatus().then((status: AppStatus) => {
+      if (AppStatus.Unlogin === status) {
+        this.props.history.replace('/login')
+      } else if (AppStatus.Ready === status) {
+        this.props.history.replace('/chat')
+      } else {
+        this.getSessId().then(accessToken => {
+          localStorage.setItem(Constants.SESS_KEY, accessToken)
+          this.props.history.replace('/login')
+        })
+        .catch(console.log)
       }
-    }
+    })
   }
 
   render() {
     return <div>
-      正在加载...
+      Loading page...
     </div>
   }
 }

@@ -4,22 +4,27 @@ import './index.css';
 import Login from './Login'
 import reportWebVitals from './reportWebVitals';
 
-import { useHistory, Route } from 'react-router-dom'
-import { Router, Switch } from 'react-router'
+import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { Chat } from './Chat';
-import { createBrowserHistory } from 'history';
 import { Loading } from './Loading';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router history={createBrowserHistory()}>
-      <Switch>
-        <Route component={Chat} path="/chat" />
-        <Route component={Login} path="/login" />
-        <Route component={Loading} path="/" />
-      </Switch>
-    </Router>
-  </React.StrictMode>,
+  // <Router history={createHashHistory()}>
+  //   <Route component={Loading} path='/' exact />
+  //   <Route component={Login} path='/login' />
+  //   <Route component={Chat} path='/chat' />
+  // </Router>
+  <Router>
+    <Switch>
+      <Route path="/" component={Loading} exact>
+      </Route>
+      <Route path="/chat" component={Chat}>
+      </Route>
+      <Route path="/login" component={Login}>
+      </Route>
+    </Switch>
+  </Router >
+  ,
   document.getElementById('root')
 );
 

@@ -1,7 +1,7 @@
 import { Col, Input, Row, Form, Avatar, Button } from 'antd'
 import React from 'react'
 
-import Icon, { CodepenCircleFilled, CodepenCircleOutlined, CodepenOutlined, GithubFilled, KeyOutlined, UserOutlined } from '@ant-design/icons'
+import { CodepenOutlined, KeyOutlined, UserOutlined } from '@ant-design/icons'
 
 import 'antd/dist/antd.css'
 
@@ -15,10 +15,8 @@ import messageManage from './assets/img/group-chat.svg'
 
 import { ResponseBody } from './ResponseBody'
 
-import { Session } from './session'
 import { User, UserInfo } from './model/user'
 import { PropsWithRoute } from './PropsWithRoute'
-import { MustLoginComponent } from './base/AfterLogin'
 import { AppStatus, checkStatus } from './service/Status'
 import { Constants } from './constants'
 
@@ -81,10 +79,14 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
       }
     }).then(res => res.json())
     .then((body: ResponseBody<UserInfo>)=> {
-      if (200 == body.code) {
+      if (200 === body.code) {
         let userData:UserInfo = body.data
         User.username = userData.username
         User.uuid = userData.userUUID
+        localStorage.setItem(Constants.USER_UUID_KEY, userData.userUUID)
+        localStorage.setItem(Constants.USER_NICKNAME_KEY, userData.nickname)
+        localStorage.setItem(Constants.USER_USERID_KEY, userData.id + '')
+        localStorage.setItem(Constants.UESR_USERNAME_KEY, userData.username)
         this.props.history.push('/chat')
       } else {
       }
@@ -103,7 +105,7 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
     fetch(this.getCodeUrl())
     .then(res => res.json())
     .then((data: ResponseBody<string>) => {
-      if (200 == data.code) {
+      if (200 === data.code) {
         this.setState({
           valImage: data.data as string
         })
@@ -118,22 +120,22 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
       <Col className='left-part' span={16}>
         <Row gutter={[16,16]}>
           <Col className='icon-g' span={12}>
-            <img src={chat} className='chat-logo'></img>
+            <img src={chat} className='chat-logo' alt='chat' />
             <p>一对一、点对点畅聊</p>
           </Col>
           <Col className='icon-g' span={12}>
-            <img src={groupChat} className='chat-logo'></img>
+            <img src={groupChat} className='chat-logo' alt='group-chat' />
             <p>一对多、畅快群聊</p>
           </Col>
           <Col className='icon-g' span={12} offset={6}>
-            <img src={messageManage} className='chat-logo'></img>
+            <img src={messageManage} className='chat-logo' alt='message'></img>
             <p>消息，轻松管理</p>
           </Col>
         </Row>
       </Col>
       <Col className='right-part' span={8}>
         <div className='form-group'>
-          <Avatar icon={<img src={male} style={{width: 56, height: 56, textAlign: 'center', display: 'inline'}} />} size={88}className='icon-avator' />
+          <Avatar icon={<img src={male} style={{width: 56, height: 56, textAlign: 'center', display: 'inline'}} alt='avator' />} size={88}className='icon-avator'  />
           <Form>
             <Form.Item
               rules={[{required: true, message: '请输入用户名'}]}
@@ -164,7 +166,7 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
                   ></Input>
                 </Col>
                 <Col span={4}>
-                  <img src={this.state.valImage} width="70px" height="35px" style={{marginLeft: '2.5px', marginTop: '2.5px'}} onClick={this.getValCode.bind(this)} />
+                  <img src={this.state.valImage} width="70px" height="35px" style={{marginLeft: '2.5px', marginTop: '2.5px'}} onClick={this.getValCode.bind(this)} alt='val_image' />
                 </Col>
               </Row>
             </Form.Item>
