@@ -90,4 +90,23 @@ public class UserController {
     }
     return ResponseVo.fail("登录失败", "用户名密码不匹配");
   }
+
+  
+  /**
+   * 检查用户登录状态
+   * @param basic 用户基本信息
+   * @return 是否已经登录，并创建会话
+   */
+  @PostMapping("/check")
+  public ValueObject checkStatus(@RequestBody UserBasicVo basic) {
+
+    ValueObject res = sessServ.getAttribute(basic.getAccessToken(), basic.getUserUUID());
+    log.info(res);
+    ResponseVo<String> status = (ResponseVo<String>) res;
+    if (200 == status.getCode() && status.isSuccess() && status.getData() != null) {
+      return ResponseVo.success(true);
+    } else {
+      return ResponseVo.success(false);
+    }
+  }
 }

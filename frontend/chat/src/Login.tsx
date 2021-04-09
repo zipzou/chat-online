@@ -15,8 +15,12 @@ import messageManage from './assets/img/group-chat.svg'
 
 import { ResponseBody } from './ResponseBody'
 
-import { Session } from './session.d'
+import { Session } from './session'
 import { User, UserInfo } from './model/user'
+import { PropsWithRoute } from './PropsWithRoute'
+import { MustLoginComponent } from './base/AfterLogin'
+import { AppStatus, checkStatus } from './service/Status'
+import { Constants } from './constants'
 
 interface LoginState {
   username?: string,
@@ -34,51 +38,39 @@ interface LoginParam {
   accessToken: string,
 }
 
+interface LoginProps extends PropsWithRoute {
 
-export default class LoginPage extends React.Component<object, LoginState> {
+}
 
-  public async getSessId() {
-    let res = await fetch('http://127.0.0.1:8080/id')
-    let resBody:ResponseBody<string> = await res.json()
-    if (200 === resBody.code) {
-      return resBody.data as string
-    } else {
-      return new Promise<string>((resolve, reject) => {
-        reject(resBody.reason)
-      })
-    }
-  }
+export default class LoginPage extends React.Component<LoginProps, LoginState> {
 
-  constructor(prop:object) {
+  constructor(prop:PropsWithRoute) {
     super(prop)
     this.state = {
       codeUrl: this.getCodeUrl(),
-      canLogin: false,
+      canLogin: true,
     }
   }
 
   componentDidMount() {
-    let res = this.getSessId()
-    res.then((val: string) => {
-      Session.sessionId = val
-      this.getValCode()
-      this.setState({
-        canLogin: true,
-      })
-      // this.state = {
-      //   canLogin: true
-      // }
-
+    // super.componentDidMount()
+    checkStatus().then((status: AppStatus) => {
+      if (status === AppStatus.Uninitilized) {
+        this.props.history.replace('/')
+      } else if (status === AppStatus.Ready) {
+        this.props.history.replace('/chat')
+      } else {
+        this.getValCode()
+      }
     })
   }
 
   toSubmitLogin() {
-    console.log(this.state)
     let param:LoginParam = {
       username: this.state.username!,
       password: this.state.password!,
       valCode: this.state.valCode!,
-      accessToken: Session.sessionId,
+      accessToken: localStorage.getItem(Constants.SESS_KEY)!,
     }
     fetch('http://127.0.0.1:8080/user/login', {
       body: JSON.stringify(param),
@@ -90,13 +82,13 @@ export default class LoginPage extends React.Component<object, LoginState> {
     }).then(res => res.json())
     .then((body: ResponseBody<UserInfo>)=> {
       if (200 == body.code) {
-        console.log(body.data)
+        let userData:UserInfo = body.data
+        User.username = userData.username
+        User.uuid = userData.userUUID
+        this.props.history.push('/chat')
       } else {
-        console.log(body.reason, body.message)
       }
-      let userData:UserInfo = body.data
-      User.username = userData.username
-      User.uuid = userData.userUUID
+      // this.props.hisotry
     })
     .catch(console.log)
   }
@@ -104,7 +96,7 @@ export default class LoginPage extends React.Component<object, LoginState> {
   getCodeUrl() {
     let baseUrl = 'http://127.0.0.1:8080/val/code'
     let timestamp = new Date().getTime()
-    return `${baseUrl}?t=${timestamp}&ak=${Session.sessionId}`
+    return `${baseUrl}?t=${timestamp}&ak=${localStorage.getItem('access_token')}`
   }
 
   getValCode() {
@@ -112,7 +104,6 @@ export default class LoginPage extends React.Component<object, LoginState> {
     .then(res => res.json())
     .then((data: ResponseBody<string>) => {
       if (200 == data.code) {
-        console.log(data.data)
         this.setState({
           valImage: data.data as string
         })
@@ -173,7 +164,7 @@ export default class LoginPage extends React.Component<object, LoginState> {
                   ></Input>
                 </Col>
                 <Col span={4}>
-                  <img src={this.state.valImage} width="70px" height="35px" style={{marginLeft: '2.5px', marginTop: '2.5px'}} onClick={() => {this.setState({codeUrl: this.getCodeUrl()})}} />
+                  <img src={this.state.valImage} width="70px" height="35px" style={{marginLeft: '2.5px', marginTop: '2.5px'}} onClick={this.getValCode.bind(this)} />
                 </Col>
               </Row>
             </Form.Item>

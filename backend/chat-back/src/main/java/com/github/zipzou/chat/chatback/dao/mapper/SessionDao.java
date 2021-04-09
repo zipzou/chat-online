@@ -85,7 +85,7 @@ public interface SessionDao {
    * 根据过期时间和当前时间，删除所有过期的数据
    * @return 删除的数据数量
    */
-  @Delete("delete from session where expired_time > NOW()  ;")
+  @Delete("delete from session where expired_time < NOW()  ;")
   public int delExpiredData();
 
 }

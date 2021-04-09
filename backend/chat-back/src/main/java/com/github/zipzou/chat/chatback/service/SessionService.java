@@ -16,6 +16,19 @@ public interface SessionService {
   public ValueObject newSession(SessionDto sess);
 
   /**
+   * 指定ID创建新的会话
+   * @param id 会话ID
+   * @return 创建结果
+   */
+  public ValueObject newSession(String id);
+
+  /**
+   * 创建新的会话
+   * @return 创建结果
+   */
+  public ValueObject newSession();
+
+  /**
    * 设置会话的键和值，如键不存在，则创建该键并写入数据，否则将修改原始键对应的内容
    * @param id 会话ID
    * @param key 数据键
