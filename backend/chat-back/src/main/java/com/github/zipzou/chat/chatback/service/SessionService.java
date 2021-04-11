@@ -59,4 +59,26 @@ public interface SessionService {
    * @return 删除结果
    */
   public ValueObject expired(String id);
+
+  /**
+   * 根据用户的UUID获取最新的用户
+   * @param uuid 用户UUID
+   * @return 当前用户名
+   */
+  @Deprecated
+  public String getUsername(String uuid);
+
+  /**
+   * 是否存在会话
+   * @param id 会话ID，即access token
+   * @return true则会话存在，否则不存在
+   */
+  public boolean existSession(String id);
+
+  /**
+   * 获取指定会话
+   * @param id 会话ID，即access token
+   * @return 会话实体
+   */
+  public ValueObject getSession(String id);
 }

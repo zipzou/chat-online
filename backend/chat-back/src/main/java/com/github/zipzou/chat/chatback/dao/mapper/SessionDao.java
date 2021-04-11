@@ -50,7 +50,7 @@ public interface SessionDao {
    * @param value 会话值
    * @return 插入的数据数量
    */
-  @Insert("insert into session_attr(session_key, session_id, session_value) values(#{key}, #{id}, #{val}) ; ")
+  @Insert("insert into session_attr(session_key, session_id, session_value, create_date) values(#{key}, #{id}, #{val}, NOW()) ; ")
   public int insertSessionKeyValue(@Param("key") String key, @Param("id") String id, @Param("val") Object value);
 
   /**
@@ -88,4 +88,12 @@ public interface SessionDao {
   @Delete("delete from session where expired_time < NOW()  ;")
   public int delExpiredData();
 
+  /**
+   * 根据用户分配的UUID查询最新的一个用户名
+   * @param uuid 用户UUID
+   * @return 用户名
+   */
+  @Deprecated
+  @Select("select distinct session_value from session_attr where session_key = #{uuid} order by create_date desc ; ")
+  public String selUsername(String uuid);
 }

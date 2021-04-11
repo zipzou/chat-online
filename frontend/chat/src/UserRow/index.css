@@ -1,0 +1,66 @@
+.online-user-row {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.online-user-row:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.online-user-row:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.user-avatar {
+  font-weight: 700;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  line-height: 48px;
+  margin: 0 8px;
+  font-size: 18px;
+}
+
+.online-user-row:hover {
+  background: #E0E0E0;
+}
+
+.online-user-row .username {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.user-status-row {
+  font-size: 12px;
+  padding: 0 4px;
+  font-weight: 500;
+}
+
+.user-status-badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #9E9E9E;
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.user-status-row.online {
+  color: #4CAF50;
+}
+
+.user-status-row.offline {
+  color: #9E9E9E;
+}
+
+.user-status-row.online .user-status-badge {
+  background-color: #4CAF50;
+}
+
+.user-status-row.offline .user-status-badge {
+  background-color: #9E9E9E;
+}

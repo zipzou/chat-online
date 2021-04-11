@@ -26,7 +26,12 @@ export class Loading extends React.Component<PropsWithRoute, unknown> {
       if (AppStatus.Unlogin === status) {
         this.props.history.replace('/login')
       } else if (AppStatus.Ready === status) {
-        this.props.history.replace('/chat')
+        this.props.history.replace('/chat', {
+          username: localStorage.getItem(Constants.UESR_USERNAME_KEY),
+          uuid: localStorage.getItem(Constants.USER_UUID_KEY),
+          nickname: localStorage.getItem(Constants.USER_NICKNAME_KEY),
+          uid: Number.parseInt(localStorage.getItem(Constants.USER_USERID_KEY) as string)
+        })
       } else {
         this.getSessId().then(accessToken => {
           localStorage.setItem(Constants.SESS_KEY, accessToken)

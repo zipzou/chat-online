@@ -4,6 +4,7 @@ import com.github.zipzou.chat.chatback.beans.mapper.SessionMap;
 import com.github.zipzou.chat.chatback.dao.bean.SessionDto;
 import com.github.zipzou.chat.chatback.dao.mapper.SessionDao;
 import com.github.zipzou.chat.chatback.vo.ValueObject;
+import com.github.zipzou.chat.chatback.vo.res.EmptyVo;
 import com.github.zipzou.chat.chatback.vo.res.ResponseVo;
 import com.github.zipzou.chat.chatback.vo.res.SessionVo;
 
@@ -110,6 +111,33 @@ public class SessionServiceImpl implements SessionService {
     String sessionId = SessionId.generateId();
     sessionItem.setSessionId(sessionId);
     return newSession(map.from(sessionItem));
+  }
+
+  @Override
+  public String getUsername(String uuid) {
+    String username = sessDao.selUsername(uuid);
+    return username;
+  }
+
+  @Override
+  public boolean existSession(String id) {
+    ValueObject session = getSession(id);
+    if (null != session && session instanceof ResponseVo && 200 == ((ResponseVo) session).getCode()){
+      ResponseVo<ValueObject> sess = (ResponseVo<ValueObject>) session;
+      if (null == sess.getData() || sess.getData() instanceof EmptyVo) {
+        return false;
+      } else if (sess.getData() instanceof SessionDto) {
+        return true;
+      }
+      return false;
+    }
+
+    return false;
+  }
+
+  @Override
+  public ValueObject getSession(String id) {
+    return ResponseVo.success("获取成功", sessDao.selSessById(id));
   }
   
 }

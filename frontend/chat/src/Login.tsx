@@ -1,4 +1,4 @@
-import { Col, Input, Row, Form, Avatar, Button } from 'antd'
+import { Col, Input, Row, Form, Avatar, Button, message } from 'antd'
 import React from 'react'
 
 import { CodepenOutlined, KeyOutlined, UserOutlined } from '@ant-design/icons'
@@ -87,8 +87,14 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
         localStorage.setItem(Constants.USER_NICKNAME_KEY, userData.nickname)
         localStorage.setItem(Constants.USER_USERID_KEY, userData.id + '')
         localStorage.setItem(Constants.UESR_USERNAME_KEY, userData.username)
-        this.props.history.push('/chat')
+        this.props.history.replace('/chat', {
+          username: userData.username,
+          uuid: userData.userUUID,
+          nickname: userData.nickname,
+          uid: userData.id
+        })
       } else {
+        message.error(body.message)
       }
       // this.props.hisotry
     })

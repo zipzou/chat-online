@@ -1,15 +1,18 @@
 package com.github.zipzou.chat.chatback.controller;
 
+import java.util.List;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.stream.Collectors;
 
 import com.github.zipzou.chat.chatback.beans.mapper.UserMap;
+import com.github.zipzou.chat.chatback.dao.bean.UserDto;
 import com.github.zipzou.chat.chatback.service.SessionService;
 import com.github.zipzou.chat.chatback.service.UserService;
+import com.github.zipzou.chat.chatback.service.WsSessionSupport;
 import com.github.zipzou.chat.chatback.vo.UserBasicVo;
 import com.github.zipzou.chat.chatback.vo.ValueObject;
 import com.github.zipzou.chat.chatback.vo.req.LoginBasicVo;
+import com.github.zipzou.chat.chatback.vo.res.AppStatus;
 import com.github.zipzou.chat.chatback.vo.res.ResponseVo;
 import com.github.zipzou.chat.chatback.vo.res.UserDetailVo;
 
@@ -67,7 +70,6 @@ public class UserController {
     return (ResponseVo<ValueObject>) result;
   }
 
-  private HttpServletRequest req;
   @PostMapping("/login")
   public ResponseVo<ValueObject> login(@RequestBody LoginBasicVo loginInfo) {
     // 先验证验证码
@@ -100,13 +102,42 @@ public class UserController {
   @PostMapping("/check")
   public ValueObject checkStatus(@RequestBody UserBasicVo basic) {
 
+    boolean sessionExist = sessServ.existSession(basic.getAccessToken());
+    if (!sessionExist) {
+      return ResponseVo.success("会话已过期", AppStatus.Uninitialized.code());
+    }
+
     ValueObject res = sessServ.getAttribute(basic.getAccessToken(), basic.getUserUUID());
     log.info(res);
+    if (null == res) {
+      return ResponseVo.success(false);
+    }
     ResponseVo<String> status = (ResponseVo<String>) res;
     if (200 == status.getCode() && status.isSuccess() && status.getData() != null) {
-      return ResponseVo.success(true);
+      return ResponseVo.success("会话存在", AppStatus.Ready.code());
     } else {
-      return ResponseVo.success(false);
+      return ResponseVo.success("会话已过期", AppStatus.Unlogin.code());
+    }
+  }
+
+  @PostMapping("/online")
+  public ValueObject onlineUsers(@RequestBody UserBasicVo basic) {
+    ValueObject status = checkStatus(basic);
+    if (null != status && status instanceof ResponseVo && AppStatus.Ready.code() == ((ResponseVo<Integer>) status).getData()) {
+      List<String> allUsernames = WsSessionSupport.sharedInstance().getAllUsernames(basic.getUserUUID());
+      List<UserBasicVo> userBasics = allUsernames.stream().map(username -> {
+        ValueObject userRes = userServ.getUser(username);
+        if (null != userRes && userRes instanceof ResponseVo) {
+          UserBasicVo userBasic = ((ResponseVo<UserBasicVo>) userRes).getData();
+          userBasic.setUserUUID(WsSessionSupport.sharedInstance().getUUIDWithUser(username));
+          return userBasic;
+        } else {
+          return null;
+        }
+      }).filter(i -> {return null != i && null != i.getUserUUID();}).collect(Collectors.toList());
+      return ResponseVo.success("获取成功", userBasics);
+    } else {
+      return ResponseVo.fail("无权限访问", "当前会话已过期，请重新连接");
     }
   }
 }

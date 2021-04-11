@@ -34,7 +34,7 @@ interface CheckLoginStatusParam {
 export async function checkStatus(): Promise<AppStatus> {
   if (localStorage.getItem(Constants.SESS_KEY) === null) {
     return AppStatus.Uninitilized;
-  } else if (localStorage.getItem(Constants.USER_UUID_KEY) === null) {
+  } else if(null === localStorage.getItem(Constants.USER_USERID_KEY)) {
     return AppStatus.Unlogin
   } else {
     // 在线检查用户登录状态
@@ -49,9 +49,9 @@ export async function checkStatus(): Promise<AppStatus> {
         'content-type': 'application/json'
       }
     })
-    let body = await res.json() as ResponseBody<boolean>
-    if (200 === body.code && body.data && body.success) {
-      return AppStatus.Ready
+    let body = await res.json() as ResponseBody<AppStatus>
+    if (200 === body.code && body.success) {
+      return body.data as AppStatus
     } else {
       return AppStatus.Unlogin
     }

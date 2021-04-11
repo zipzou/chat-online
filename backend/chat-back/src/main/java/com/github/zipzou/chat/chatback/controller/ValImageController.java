@@ -64,7 +64,7 @@ public class ValImageController {
   public ResponseVo<ValueObject> validateCode(@PathVariable String code, @PathVariable("ak") String accessToken) {
     ResponseVo<String> val = (ResponseVo<String>) sessServ.getAttribute(accessToken, Constants.KAPTCHA_SESSION_KEY);
     sessServ.removeAttribute(accessToken, Constants.KAPTCHA_SESSION_KEY);
-    if (null == val) {
+    if (null == val || ((ResponseVo) val).getCode() != 200) {
       return ResponseVo.fail("无法完成验证", "验证码已过期，请重新获取验证码。");
     }
     String sessionCode = val.getData();
