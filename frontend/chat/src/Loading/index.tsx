@@ -1,8 +1,11 @@
+import { Loading3QuartersOutlined } from "@ant-design/icons";
 import React from "react";
 import { Constants } from "../constants";
 import { PropsWithRoute } from "../PropsWithRoute";
 import { ResponseBody } from "../ResponseBody";
 import { AppStatus, checkStatus } from "../service/Status";
+
+import './index.css'
 
 export class Loading extends React.Component<PropsWithRoute, unknown> {
 
@@ -53,8 +56,13 @@ export class Loading extends React.Component<PropsWithRoute, unknown> {
   }
 
   render() {
-    return <div>
-      Loading page...
+    let height = window.innerHeight
+    return <div className='loading-container' style={{height: height}}>
+      <Loading3QuartersOutlined
+        className='init-icon'
+        spin
+      />
+      <div className='init-title'>正在初始化...</div>
     </div>
   }
 }

@@ -1,0 +1,19 @@
+.loading-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.init-icon {
+  font-size: 100px;
+  color: #212121;;
+}
+
+.init-title {
+  font-size: 28px;
+  font-weight: 500;
+  color: #212121;
+  margin-top: 48px;
+}
