@@ -3,6 +3,7 @@ package com.github.zipzou.chat.chatback.vo.res;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.zipzou.chat.chatback.vo.ValueObject;
 
 import lombok.AllArgsConstructor;
@@ -51,7 +52,7 @@ public class MessageToSendVo<T> implements ValueObject {
   /**
    * 如果发送的是文件，文件类型
    */
-  private String fileType;
+  private Long fileType;
 
   /**
    * 已读状态
@@ -62,6 +63,7 @@ public class MessageToSendVo<T> implements ValueObject {
    * 消息发送日期
    */
   @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private Date createDate;
 
   /**

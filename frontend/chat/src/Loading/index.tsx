@@ -1,7 +1,4 @@
-import { createHashHistory } from "history";
 import React from "react";
-import { Router } from "react-router";
-import { Link } from "react-router-dom";
 import { Constants } from "../constants";
 import { PropsWithRoute } from "../PropsWithRoute";
 import { ResponseBody } from "../ResponseBody";
@@ -10,15 +7,28 @@ import { AppStatus, checkStatus } from "../service/Status";
 export class Loading extends React.Component<PropsWithRoute, unknown> {
 
   public async getSessId(): Promise<string> {
-    let res = await fetch('http://127.0.0.1:8080/id')
-    let resBody: ResponseBody<string> = await res.json()
-    if (200 === resBody.code) {
-      return resBody.data as string
-    } else {
+    try {
+      let res = await fetch('http://127.0.0.1:8080/id')
+      if (res.status !== 200) {
+        return new Promise<string>((r, e) => {
+          e("网络错误")
+        })
+      }
+      let resBody: ResponseBody<string> = await res.json()
+      if (200 === resBody.code) {
+        return resBody.data as string
+      } else {
+        return new Promise<string>((resolve, reject) => {
+          reject(resBody.reason)
+        })
+      }
+    } catch(err) {
+      console.log(err)
       return new Promise<string>((resolve, reject) => {
-        reject(resBody.reason)
+        reject("网络错误")
       })
     }
+    
   }
 
   componentDidMount() {

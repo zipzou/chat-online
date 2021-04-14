@@ -98,3 +98,89 @@
   padding-left: 0;
   padding-right: 4px;
 }
+
+.message-par .image-inline {
+  max-width: 160px;
+  padding: 8px;
+}
+
+.message-par .file-inline {
+  /* display: flex;
+  align-items: center; */
+}
+
+.message-par.file-msg {
+  padding: 0;
+  background-color: #880E4F;
+  width: 220px;
+}
+
+
+.file-msg.message-par-left::before {
+  border-color: transparent #880E4F transparent transparent;
+}
+.file-msg.message-par-right::before {
+  border-color: transparent transparent transparent #880E4F;
+}
+.message-par .file-header {
+  height: 140px;
+  background: #880E4F;
+  border-radius: 8px;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-par.file-msg .file-header .file-ext {
+  margin-left: 20px;
+  font-size: 30px;
+  letter-spacing: 4pt;
+  font-weight: 700;
+}
+
+.message-par.file-msg .file-header .file-icon {
+  font-size: 32px;
+  color: #fff;
+}
+
+.message-par.file-msg .file-op-row {
+  width: 100%;
+  height: 56px;
+  color: #212121;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.message-par.file-msg .file-op-row a, .message-par.file-msg .file-op-row .file-link {
+  color: #212121;
+  line-height: 56px;
+  font-size: 16px;
+}
+
+.message-par .file-inline .file-link {
+  color: #212121;
+  text-decoration: underline;
+}
+
+.message-par.file-msg .file-op-row .download-i {
+  margin-left: 12px;
+}
+/* 
+.message-par .file-inline .file-link::after {
+  content: ' ';
+  display: block;
+  height: 1px;
+  margin-left: 12px;
+  border: .5px solid #212121;
+} */
+
+.message-par .file-inline .filename {
+  margin: 0;
+  margin-left: 12px;
+  width: 160px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}

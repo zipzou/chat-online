@@ -55,7 +55,7 @@ public class SimpleMessageDto implements Serializable {
   /**
    * 如果发送的是文件，文件类型
    */
-  private String fileType;
+  private Long fileType;
 
   /**
    * 已读状态

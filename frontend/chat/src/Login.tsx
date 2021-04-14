@@ -26,7 +26,9 @@ interface LoginState {
   valCode?: string,
   codeUrl?: string,
   canLogin: boolean,
+  canRegister: boolean,
   valImage?: string,
+  mode: 'login' | 'register'
 }
 
 interface LoginParam {
@@ -46,8 +48,16 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
     super(prop)
     this.state = {
       codeUrl: this.getCodeUrl(),
-      canLogin: true,
+      canLogin: false,
+      canRegister: false,
+      mode: 'login'
     }
+  }
+
+  renderRegisterComponent() {
+    return <div>
+
+    </div>
   }
 
   componentDidMount() {
@@ -63,6 +73,56 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
     })
   }
 
+  toRegister() {
+    let param:LoginParam = {
+      username: this.state.username!,
+      password: this.state.password!,
+      valCode: this.state.valCode!,
+      accessToken: localStorage.getItem(Constants.SESS_KEY)!,
+    }
+    this.setState({
+      canRegister: false,
+    })
+
+    fetch('http://127.0.0.1:8080/user/register', {
+      body: JSON.stringify(param),
+      method: 'post',
+      headers: {
+        'content-type': 'application/json',
+        'withCredentials': "same-origin",
+      }
+    }).then(res => res.json())
+    .then((body: ResponseBody<UserInfo>)=> {
+      if (200 === body.code) {
+        let userData:UserInfo = body.data
+        User.username = userData.username
+        User.uuid = userData.userUUID
+        localStorage.setItem(Constants.USER_UUID_KEY, userData.userUUID)
+        localStorage.setItem(Constants.USER_NICKNAME_KEY, userData.nickname)
+        localStorage.setItem(Constants.USER_USERID_KEY, userData.id + '')
+        localStorage.setItem(Constants.UESR_USERNAME_KEY, userData.username)
+        this.props.history.replace('/chat', {
+          username: userData.username,
+          uuid: userData.userUUID,
+          nickname: userData.nickname,
+          uid: userData.id
+        })
+      } else {
+        message.error(body.message)
+        this.setState({
+          canRegister: true,
+        })
+      }
+      // this.props.hisotry
+    })
+    .catch(e => {
+      console.log(e)
+      this.setState({
+        canRegister: true,
+      })
+    })
+  }
+
   toSubmitLogin() {
     let param:LoginParam = {
       username: this.state.username!,
@@ -70,6 +130,9 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
       valCode: this.state.valCode!,
       accessToken: localStorage.getItem(Constants.SESS_KEY)!,
     }
+    this.setState({
+      canLogin: false,
+    })
     fetch('http://127.0.0.1:8080/user/login', {
       body: JSON.stringify(param),
       method: 'post',
@@ -95,10 +158,18 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
         })
       } else {
         message.error(body.message)
+        this.setState({
+          canLogin: true,
+        })
       }
       // this.props.hisotry
     })
-    .catch(console.log)
+    .catch(e => {
+      console.log(e)
+      this.setState({
+        canLogin: true,
+      })
+    })
   }
 
   getCodeUrl() {
@@ -114,6 +185,10 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
       if (200 === data.code) {
         this.setState({
           valImage: data.data as string
+        })
+        this.setState({
+          canLogin: true,
+          canRegister: true
         })
       }
     })
@@ -183,9 +258,11 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
                 }
               }
             >
-              <Button title='登录' type='primary' htmlType='submit' size='large' onSubmit={this.toSubmitLogin.bind(this)} onClick={this.toSubmitLogin.bind(this)}
+              {this.state.mode === 'login' ? <Button title='登录' type='primary' htmlType='submit' size='large' onSubmit={this.toSubmitLogin.bind(this)} onClick={this.toSubmitLogin.bind(this)}
                 disabled = {!this.state.canLogin}
-              >登录</Button>
+              >登录</Button> : <Button title='注册' type='primary' htmlType='submit' size='large' onSubmit={this.toRegister.bind(this)} onClick={this.toRegister.bind(this)}
+              disabled = {!this.state.canRegister}
+            >注册</Button>}
             </Form.Item>
             {/* <Form.Item>
               <Row gutter={8}>
@@ -204,7 +281,7 @@ export default class LoginPage extends React.Component<LoginProps, LoginState> {
               </Row>
             </Form.Item> */}
             <Form.Item>
-              <Button type='link' href='./register'>立即注册</Button>
+              <Button type='link' onClick={() => {this.setState({mode: 'register'})}}>立即注册</Button>
             </Form.Item>
           </Form>
         </div>

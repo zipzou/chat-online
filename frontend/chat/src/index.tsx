@@ -8,22 +8,29 @@ import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { Chat } from './Chat';
 import { Loading } from './Loading';
 
+import { Provider } from 'mobx-react'
+import { store } from './data/store';
+
 ReactDOM.render(
   // <Router history={createHashHistory()}>
   //   <Route component={Loading} path='/' exact />
   //   <Route component={Login} path='/login' />
   //   <Route component={Chat} path='/chat' />
   // </Router>
-  <Router>
-    <Switch>
-      <Route path="/" component={Loading} exact>
-      </Route>
-      <Route path="/chat" component={Chat}>
-      </Route>
-      <Route path="/login" component={Login}>
-      </Route>
-    </Switch>
-  </Router >
+  <Provider
+    {...store}
+  >
+    <Router>
+      <Switch>
+        <Route path="/" component={Loading} exact>
+        </Route>
+        <Route path="/chat" component={Chat}>
+        </Route>
+        <Route path="/login" component={Login}>
+        </Route>
+      </Switch>
+    </Router >
+  </Provider>
   ,
   document.getElementById('root')
 );

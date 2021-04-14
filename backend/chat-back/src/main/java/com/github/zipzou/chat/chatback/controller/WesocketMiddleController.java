@@ -95,6 +95,7 @@ public class WesocketMiddleController {
           sess.getAsyncRemote().sendText(JSON.toJSONString(onlineUserMsg));
         }
       }
+
     } else {
       log.info("当前用户并未登录，无权限访问");
       try {
@@ -112,6 +113,9 @@ public class WesocketMiddleController {
       if (messageBody.getType() == MessageType.ReadStatus.code()) {
         msgSender.readMessage(messageBody.getId());
       }
+      if (messageBody.getTo() == null) {
+        log.warn("未知的发送目标", messageBody);
+      }
       msgSender.send(messageBody);
     } catch (Exception ex) {
       // 无法转换
@@ -122,8 +126,8 @@ public class WesocketMiddleController {
 
   @OnClose
   public void disConnect(Session sess) {
-    WsSessionSupport.sharedInstance().removeSession(sess);
     // TODO: 告知其他用户，下线消息
     msgSender.offline(WsSessionSupport.sharedInstance().getUUID(sess));
+    WsSessionSupport.sharedInstance().removeSession(sess);
   }
 }

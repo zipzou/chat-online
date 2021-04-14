@@ -1,6 +1,8 @@
 package com.github.zipzou.chat.chatback.service;
 
+import com.github.zipzou.chat.chatback.vo.ValueObject;
 import com.github.zipzou.chat.chatback.vo.req.TextMessageVo;
+import com.github.zipzou.chat.chatback.vo.res.MessageToSendVo;
 
 /**
  * 
@@ -12,6 +14,14 @@ public interface MessageService {
    * @param msg 待发送的消息
    */
   public void send(TextMessageVo msg);
+
+  /**
+   * 
+   * @param from
+   * @param to
+   * @param msg
+   */
+  public void send(String from, String to, MessageToSendVo<ValueObject> msg);
 
   /**
    * 发送上线通知

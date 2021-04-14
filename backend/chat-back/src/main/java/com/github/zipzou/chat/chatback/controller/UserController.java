@@ -13,6 +13,7 @@ import com.github.zipzou.chat.chatback.vo.UserBasicVo;
 import com.github.zipzou.chat.chatback.vo.ValueObject;
 import com.github.zipzou.chat.chatback.vo.req.LoginBasicVo;
 import com.github.zipzou.chat.chatback.vo.res.AppStatus;
+import com.github.zipzou.chat.chatback.vo.res.EmptyVo;
 import com.github.zipzou.chat.chatback.vo.res.ResponseVo;
 import com.github.zipzou.chat.chatback.vo.res.UserDetailVo;
 
@@ -93,6 +94,10 @@ public class UserController {
     return ResponseVo.fail("登录失败", "用户名密码不匹配");
   }
 
+  @PostMapping("/logout")
+  public ResponseVo<EmptyVo> logout(@RequestBody LoginBasicVo user) {
+    return (ResponseVo) sessServ.expired(user.getAccessToken());
+  }
   
   /**
    * 检查用户登录状态

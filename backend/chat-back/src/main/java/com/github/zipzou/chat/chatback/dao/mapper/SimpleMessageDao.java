@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.type.JdbcType;
 
 /**
  * 点对点消息存储类
@@ -19,7 +20,7 @@ public interface SimpleMessageDao {
    * @param message 消息实体
    * @return 新增的数据量
    */
-  @Insert("insert into simple_message(id, from, `to`, type, content, extension, file_url, file_type, status, create_date) values(#{id}, #{from}, #{to}, #{type}, #{content}, #{extension}, #{fileUrl}, #{fileType}, #{readStatus}, #{createDate}) ; ")
+  @Insert("insert into simple_message(id, `from`, `to`, type, content, extension, file_url, file_type, status, create_date) values(#{id}, #{from}, #{to}, #{type}, #{content}, #{extension}, #{fileUrl}, #{fileType}, #{readStatus}, #{createDate}) ; ")
   public int insertMessage(SimpleMessageDto message);
 
   /**
@@ -44,10 +45,10 @@ public interface SimpleMessageDao {
     @Result(column = "extension", property = "extension"),
     @Result(column = "file_url", property = "fileUrl"),
     @Result(column = "file_type", property = "fileType"),
-    @Result(column = "status", property = "status"),
+    @Result(column = "status", property = "readStatus", jdbcType = JdbcType.TINYINT, javaType = Boolean.class),
     @Result(column = "create_date", property = "createDate"),
   })
-  @Select("select* from simple_message where from =  #{from}  order by create_date desc ;")
+  @Select("select* from simple_message where `from` =  #{from}  order by create_date desc ;")
   public List<SimpleMessageDto> selAllMessagesFrom(String from);
 
   /**
@@ -60,14 +61,25 @@ public interface SimpleMessageDao {
   public List<SimpleMessageDto> selAllMessagesTo(String to);
 
   /**
-   * 查询若干条指定用户的所有消息
-   * @param to 消息接收者
+   * 查询若干条指定用户的所有消息（按时间倒序截取）
+   * @param to 消息接收或发送者
    * @param limit 消息数量
-   * @return 指定用户接收的消息列表
+   * @return 指定用户接收或发送的消息列表
    */
   @ResultMap(value = "messageMap")
-  @Select("select * from simple_message where `to` =  #{to} order by create_date desc limit #{limit} ;  ")
+  @Select("select * from simple_message where `to` =  #{to} or `from` = #{to} order by create_date desc limit #{limit} ;  ")
   public List<SimpleMessageDto> selAllMessagesToLimitBy(String to, int limit);
+
+  /**
+   * 查询若干条指定用户的所有消息（按时间倒序截取）
+   * @param to 消息接收或发送者
+   * @param limit 一次查找消息数量
+   * @param before 用于分界的ID
+   * @return 指定用户接收或发送的消息列表
+   */
+  @ResultMap(value = "messageMap")
+  @Select("select * from simple_message where (`to` =  #{to} or `from` = #{to}) and id < before order by create_date desc limit #{limit} ;  ")
+  public List<SimpleMessageDto> selMoreMessages(String to, int limit, Long before);
 
   /**
    * 获取指定用户发送但是未被读取的消息

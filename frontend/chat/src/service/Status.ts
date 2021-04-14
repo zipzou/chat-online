@@ -42,18 +42,27 @@ export async function checkStatus(): Promise<AppStatus> {
       accessToken: localStorage.getItem(Constants.SESS_KEY)!,
       userUUID: localStorage.getItem(Constants.USER_UUID_KEY)!
     }
-    let res = await fetch('http://127.0.0.1:8080/user/check', {
-      method: 'post',
-      body: JSON.stringify(param),
-      headers: {
-        'content-type': 'application/json'
+    try {
+      let res = await fetch('http://127.0.0.1:8080/user/check', {
+        method: 'post',
+        body: JSON.stringify(param),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      if (res.status !== 200) {
+        return AppStatus.Uninitilized
       }
-    })
-    let body = await res.json() as ResponseBody<AppStatus>
-    if (200 === body.code && body.success) {
-      return body.data as AppStatus
-    } else {
-      return AppStatus.Unlogin
+      let body = await res.json() as ResponseBody<AppStatus>
+      if (200 === body.code && body.success) {
+        return body.data as AppStatus
+      } else {
+        return AppStatus.Unlogin
+      }
+    } catch(err) {
+      console.log(err)
+      return AppStatus.Uninitilized
     }
+    
   }
 }

@@ -163,6 +163,10 @@ ul.col-nav li {
 .message-list {
   width: 96%;
   margin: 0 auto;
+  height: 478px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .placeholder-chat {
@@ -194,4 +198,9 @@ ul.col-nav li {
   height: 1px;
   width: 100%;
   margin-top: 16px;
+}
+
+.operation-area .op-item {
+  line-height: 84px;
+  margin-left: 8px;
 }
